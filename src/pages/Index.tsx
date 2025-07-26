@@ -1,13 +1,35 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { Hero } from "@/components/Hero";
+import { LoginForm } from "@/components/LoginForm";
+import { Dashboard } from "@/components/Dashboard";
 
 const Index = () => {
+  const [showLogin, setShowLogin] = useState(false);
+  const [user, setUser] = useState<string | null>(null);
+
+  const handleLogin = (email: string) => {
+    setUser(email);
+    setShowLogin(false);
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+  };
+
+  if (user) {
+    return <Dashboard userEmail={user} onLogout={handleLogout} />;
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      <Hero onLoginClick={() => setShowLogin(true)} />
+      {showLogin && (
+        <LoginForm
+          onLogin={handleLogin}
+          onClose={() => setShowLogin(false)}
+        />
+      )}
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import heroImage from "@/assets/hero-facility.jpg";
+import heroImage from "@/assets/airforce-base-sketch.jpg";
 
 interface HeroProps {
   onLoginClick: () => void;
